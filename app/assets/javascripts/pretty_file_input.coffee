@@ -60,6 +60,7 @@
               "Uploading (#{percentComplete}%)"
           )
         complete: =>
+          @$input.show()
           $tmpForm.remove()
         success: $.proxy(@_uploadSuccess, @)
         error: $.proxy(@_uploadError, @)
@@ -72,7 +73,7 @@
       """)
 
       $oldInput = @$input
-      @$input = $oldInput.clone().val('').insertBefore($oldInput)
+      @$input = $oldInput.clone().hide().val('').insertBefore($oldInput)
       @_bindInputChange()
       $oldInput.appendTo(form)
       $oldInput.attr('name', @options.name)
