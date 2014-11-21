@@ -1,0 +1,19 @@
+// A more functional file input
+.pfi {
+  input {
+    display: inline;
+  }
+}
+
+.pfi_uploaded{
+  display: none;
+}
+
+.is_uploaded {
+  .pfi_uploaded {
+    display: block;
+  }
+  .pfi_not_uploaded {
+    display: none;
+  }
+}
