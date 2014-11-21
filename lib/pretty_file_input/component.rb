@@ -1,12 +1,12 @@
 require 'erector'
 
 class PrettyFileInput::Component < Erector::Widget
-  needs :name,                # input name that will be sent to the server
-        persisted: false,     # is parent object is not persisted, no AJAX calls will be made
-        filename: nil,        # pre-populate the filename span
-        method: nil,          # override the parent form's method
-        action: nil,          # override the parent form's action
-        additional_params: {} # additional parameters to be sent to server with each request
+  needs :name,
+        persisted: false,
+        filename: nil,
+        method: nil,
+        action: nil,
+        additional_params: {}
 
   def content
     div(
