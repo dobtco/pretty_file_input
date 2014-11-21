@@ -32,7 +32,11 @@
       @_bindEvents()
 
     remove: ->
-      @_ajaxRemove() if @options.persisted
+      if @options.persisted
+        @_ajaxRemove()
+      else
+        @$input.val('')
+
       @options.name = undefined
       @$el.removeClass('is_uploaded')
 
@@ -82,7 +86,7 @@
       form
 
     _uploadSuccess: (data) ->
-      if data.additionalParams?
+      if data?.additionalParams?
         @options.additionalParams = data.additionalParams
 
       @$status.text('')

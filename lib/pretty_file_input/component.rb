@@ -22,7 +22,7 @@ class PrettyFileInput::Component < Erector::Widget
       div.pfi_uploaded {
         span.pfi_existing_filename @filename
         text ' '
-        a.button.mini.info t('actions.remove'), 'data-pfi-remove' => true
+        a.button.mini.info 'Remove', 'data-pfi-remove' => true
       }
       div.pfi_not_uploaded {
         input type: 'file'
