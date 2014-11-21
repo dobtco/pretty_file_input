@@ -27,7 +27,7 @@
       @removeParams[removeKey] = true
 
       @options.action ||= @$form.attr('action')
-      @options.method ||= @$form.attr('method')
+      @options.method ||= @$form.find('[name=_method]').val() || @$form.attr('method')
 
       @_bindEvents()
 
