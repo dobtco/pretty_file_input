@@ -1,4 +1,4 @@
-pretty_file_input [![version]](http://rubygems.org/gems/pretty_file_input) ![build](https://travis-ci.org/dobtco/pretty_file_input)
+pretty_file_input [![version]](http://rubygems.org/gems/pretty_file_input) [![build]](https://travis-ci.org/dobtco/pretty_file_input)
 =======
 
 pretty_file_input is an attempt to standardize the always-problematic file input in our Rails apps.
