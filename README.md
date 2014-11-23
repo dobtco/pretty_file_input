@@ -14,6 +14,8 @@ pretty_file_input is an attempt to standardize the always-problematic file input
 
 - [carrierwave](https://github.com/carrierwaveuploader/carrierwave)
 - [simple_form](https://github.com/plataformatec/simple_form) (if using the "Automatic" implementation below)
+- jQuery
+- [jquery.form](https://github.com/malsup/form/)
 
 ## Installation
 

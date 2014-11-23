@@ -5,3 +5,7 @@ coverage/*
 *.gem
 Gemfile.lock
 .ruby-gemset
+spec/dummy/tmp/*
+spec/dummy/log/*
+spec/dummy/public/uploads/*
+spec/dummy/db/test.sqlite
