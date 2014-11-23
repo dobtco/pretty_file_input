@@ -1,7 +1,14 @@
 pretty_file_input [![version]](http://rubygems.org/gems/pretty_file_input)
 =======
 
-pretty_file_input is an attempt to standardize the always-problematic file input in our Rails apps. The goal is to provide additional functionality while preserving 100% compatibility with existing models and controllers.
+pretty_file_input is an attempt to standardize the always-problematic file input in our Rails apps.
+
+## Benefits
+
+- Immediate uploads via AJAX for `persisted?` records
+- Upload percentage displayed while uploading
+- Identical user interface (without AJAX uploads) for non-`persisted?` records
+- Use your existing models and controllers, no changes necessary
 
 ## Requirements
 
