@@ -3,7 +3,7 @@ class PrettyFileInputInput < SimpleForm::Inputs::Base
     @builder.multipart = true
     PrettyFileInput::Component.new(
       name: tag_name,
-      persisted: object.persisted?,
+      persisted: object.try(:persisted?),
       filename: object.try(:send, attribute_name).try(:file).try(:filename)
     ).to_html
   end
