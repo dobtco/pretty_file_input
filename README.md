@@ -21,7 +21,7 @@ pretty_file_input is an attempt to standardize the always-problematic file input
 
 ```sh
 # Gemfile
-gem 'dvl-core'
+gem 'pretty_file_input'
 
 # application.css
 *= require pretty_file_input
