@@ -1,5 +1,5 @@
 class PrettyFileInputInput < SimpleForm::Inputs::Base
-  def input
+  def input(wrapper_options)
     @builder.multipart = true
     PrettyFileInput::Component.new(
       name: tag_name,

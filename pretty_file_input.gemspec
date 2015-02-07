@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'capybara', '2.4.4'
   s.add_development_dependency 'carrierwave'
-  s.add_development_dependency 'rails', '4.1.7'
+  s.add_development_dependency 'rails', '4.1.9'
   s.add_development_dependency 'rspec-rails', '3.1.0'
   s.add_development_dependency 'selenium-webdriver', '2.43.0'
-  s.add_development_dependency 'simple_form'
+  s.add_development_dependency 'simple_form', '3.1.0'
   s.add_development_dependency 'sqlite3', '1.3.9'
 end
