@@ -38,5 +38,15 @@ describe 'Users', js: true, type: :feature do
       find('a', text: 'Remove').click
       expect(user.reload.avatar).to be_blank
     end
+
+    it 'adds after removal' do
+      visit edit_user_path(user)
+      find('a', text: 'Remove').click
+      expect(user.reload.avatar).to be_blank
+      find('input[type=file]').set "#{Rails.root}/spec/fixtures/avatar2.jpg"
+      sleep 1
+      expect(user.reload.avatar).to_not be_blank
+      expect(user.avatar.file.filename).to eq 'avatar2.jpg'
+    end
   end
 end
