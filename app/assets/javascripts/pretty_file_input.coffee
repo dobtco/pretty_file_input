@@ -13,9 +13,13 @@
       @options = $.extend {}, @defaults, options, @$el.data('pfi')
 
       @$form = @$el.closest('form')
-      @$input = @$el.find('input').attr('name', if @options.persisted then false else @options.name)
+      @$input = @$el.find('input')
       @$filename = @$el.find('.pfi_existing_filename')
       @$status = @$el.find('.pfi_status')
+
+      # If we're not persisted, immediately add the correct input name
+      if !@options.persisted
+        @$input.attr('name', @options.name)
 
       removeKey = if @options.name.match(/\[/)
         i = @options.name.lastIndexOf('[')
@@ -37,7 +41,6 @@
       else
         @$input.val('')
 
-      @options.name = undefined
       @$el.removeClass('is_uploaded')
 
     _baseParams: ->
@@ -80,7 +83,12 @@
       @$input = $oldInput.clone().hide().val('').insertBefore($oldInput)
       @_bindInputChange()
       $oldInput.appendTo(form)
+
+      # We only add the name immediately before uploading because we
+      # don't want to send the input value during submission of an
+      # outer form.
       $oldInput.attr('name', @options.name)
+
       form.insertBefore(@$input)
 
       form
