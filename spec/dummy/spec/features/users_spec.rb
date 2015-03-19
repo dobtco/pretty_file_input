@@ -30,6 +30,11 @@ describe 'Users', js: true, type: :feature do
       user.update(remove_avatar: true)
       expect(user.avatar).to be_blank
       visit edit_user_path(user)
+
+      # Initial visibility expectations
+      expect(page).to_not have_selector 'input[type=file]'
+      expect(page).to_not have_selector 'a', text: 'Remove'
+
       file_input.set "#{Rails.root}/spec/fixtures/avatar2.jpg"
       sleep 1
       expect(user.reload.avatar).to_not be_blank
