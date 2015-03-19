@@ -56,12 +56,15 @@
       $('.js_pfi_toggle').toggle()
 
     _baseParams: ->
-      $.extend { pretty_file_input: true }, @options.additionalParams
+      $.extend {
+        pretty_file_input: true
+        _method: @options.method
+      }, @options.additionalParams
 
     _ajaxRemove: ->
       $.ajax
         url: @options.action
-        type: @options.method
+        type: 'POST'
         dataType: 'json'
         data: $.extend @_baseParams(), @removeParams
 
