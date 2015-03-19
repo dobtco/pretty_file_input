@@ -49,4 +49,36 @@ describe 'Users', js: true, type: :feature do
       expect(user.avatar.file.filename).to eq 'avatar2.jpg'
     end
   end
+
+  describe 'error messages' do
+    before do
+      user.update(remove_avatar: true)
+    end
+
+    it 'displays server-generated errors' do
+      visit edit_user_path(user)
+      find('input[type=file]').set "#{Rails.root}/spec/fixtures/error.jpg"
+      sleep 1
+      expect(page).to have_text 'server-generated error message'
+
+      # Error clears after an interval
+      sleep 1.5
+      expect(page).to_not have_text 'server-generated error message'
+
+      expect(user.reload.avatar).to be_blank
+    end
+
+    it 'falls back to a generic error' do
+      visit edit_user_path(user)
+      find('input[type=file]').set "#{Rails.root}/spec/fixtures/unknownerror.jpg"
+      sleep 1
+      expect(page).to have_text 'Whoops!'
+
+      # Error clears after an interval
+      sleep 1.5
+      expect(page).to_not have_text 'Whoops!'
+
+      expect(user.reload.avatar).to be_blank
+    end
+  end
 end

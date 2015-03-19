@@ -15,6 +15,18 @@ class UsersController < ActionController::Base
   end
 
   def update
+    # Hack for testing errors
+    if user_params[:avatar]
+      if user_params[:avatar].original_filename.match('unknownerror')
+        return head :bad_request
+      elsif user_params[:avatar].original_filename.match('error')
+        return render(
+          json: { error: 'This is a server-generated error message.' },
+          status: :bad_request
+        )
+      end
+    end
+
     @user = User.find(params[:id])
     @user.update(user_params)
 

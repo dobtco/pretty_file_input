@@ -10,7 +10,7 @@ class PrettyFileInput::Component < Erector::Widget
 
   def content
     div(
-      class: "pfi cf #{@filename ? 'is_uploaded' : ''}",
+      class: 'pfi cf',
       'data-pfi' => {
         name: @name,
         persisted: @persisted,
@@ -19,14 +19,14 @@ class PrettyFileInput::Component < Erector::Widget
         additionalParams: @additional_params
       }.to_json
     ) {
-      div.pfi_uploaded {
-        span.pfi_existing_filename @filename
+      div.js_pfi_present(style: @filename ? nil : 'display:none;') {
+        span.js_pfi_filename @filename
         text ' '
         a.button.mini.info 'Remove', 'data-pfi-remove' => true
       }
-      div.pfi_not_uploaded {
+      div.js_pfi_blank(style: @filename ? 'display:none;' : nil) {
         input type: 'file'
-        span.pfi_status
+        span.js_pfi_status
       }
     }
   end

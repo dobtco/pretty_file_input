@@ -14,8 +14,8 @@
 
       @$form = @$el.closest('form')
       @$input = @$el.find('input')
-      @$filename = @$el.find('.pfi_existing_filename')
-      @$status = @$el.find('.pfi_status')
+      @$filename = @$el.find('.js_pfi_filename')
+      @$status = @$el.find('.js_pfi_status')
 
       # If we're not persisted, immediately add the correct input name
       if !@options.persisted
@@ -41,7 +41,10 @@
       else
         @$input.val('')
 
-      @$el.removeClass('is_uploaded')
+      @_toggleState()
+
+    _toggleState: ->
+      $('.js_pfi_present, .js_pfi_blank').toggle()
 
     _baseParams: ->
       $.extend { pretty_file_input: true }, @options.additionalParams
@@ -98,10 +101,15 @@
         @options.additionalParams = data.additionalParams
 
       @$status.text('')
-      @$el.addClass('is_uploaded')
+      @_toggleState()
 
-    _uploadError: ->
-      @$status.text 'Error'
+    _uploadError: (xhr) ->
+      msg = if (err = xhr.responseJSON?.error)
+              "Error: #{err}"
+            else
+              'Whoops! An error occurred.'
+
+      @$status.text msg
       setTimeout ( => @$status.text('') ), 2000
 
     _eventToFilename: (e) ->
