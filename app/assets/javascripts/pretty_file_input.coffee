@@ -17,14 +17,18 @@
       @$filename = @$el.find('.js_pfi_filename')
       @$status = @$el.find('.js_pfi_status')
       @$button = @$el.find('.js_pfi_browse')
-
       @buttonText = @$button.text()
       @statusText = @$status.text()
 
-      # If we're not persisted, immediately add the correct input name
-      if !@options.persisted
+      if @options.persisted
+        @_calculateRemoveParams()
+        @_copyOptionsFromForm()
+      else
         @$input.attr('name', @options.name)
 
+      @_bindEvents()
+
+    _calculateRemoveParams: ->
       removeKey = if @options.name.match(/\[/)
         i = @options.name.lastIndexOf('[')
         "#{@options.name.substring(0, i)}[remove_#{@options.name.substring(i + 1, @options.name.length)}"
@@ -34,10 +38,9 @@
       @removeParams = {}
       @removeParams[removeKey] = true
 
+    _copyOptionsFromForm: ->
       @options.action ||= @$form.attr('action')
       @options.method ||= @$form.find('[name=_method]').val() || @$form.attr('method')
-
-      @_bindEvents()
 
     remove: ->
       @$status.text @statusText
@@ -50,7 +53,7 @@
       @_toggleState()
 
     _toggleState: ->
-      $('.js_pfi_present, .js_pfi_blank').toggle()
+      $('.js_pfi_toggle').toggle()
 
     _baseParams: ->
       $.extend { pretty_file_input: true }, @options.additionalParams
@@ -76,44 +79,44 @@
               "Uploading (#{percentComplete}%)"
           )
         complete: =>
-          @$input.show()
           $tmpForm.remove()
         success: $.proxy(@_uploadSuccess, @)
         error: $.proxy(@_uploadError, @)
 
     _createTemporaryForm: ->
-      form = $("""
+      $form = $("""
         <form action='#{@options.action}' method='post' style='display: inline;'>
           <input type='hidden' name='_method' value='#{@options.method}' />
         </form>
       """)
 
       $oldInput = @$input
-      @$input = $oldInput.clone().hide().val('').insertBefore($oldInput)
+      @$input = $oldInput.clone().val('').insertBefore($oldInput)
       @_bindInputChange()
-      $oldInput.appendTo(form)
+      $oldInput.appendTo($form)
 
       # We only add the name immediately before uploading because we
       # don't want to send the input value during submission of an
       # outer form.
       $oldInput.attr('name', @options.name)
 
-      form.insertBefore(@$input)
+      $form.insertBefore(@$input)
 
-      form
+      $form
 
     _uploadSuccess: (data) ->
       if data?.additionalParams?
         @options.additionalParams = data.additionalParams
 
-      @$button.removeClass('disabled')
-      @$button.text @buttonText
+      @_resetButton()
       @_toggleState()
 
-    _uploadError: (xhr) ->
+    _resetButton: ->
       @$button.removeClass('disabled')
       @$button.text @buttonText
 
+    _uploadError: (xhr) ->
+      @_resetButton()
       @_flashError(
         if (err = xhr.responseJSON?.error)
           "Error: #{err}"
