@@ -19,14 +19,18 @@ class PrettyFileInput::Component < Erector::Widget
         additionalParams: @additional_params
       }.to_json
     ) {
-      div.js_pfi_present(style: @filename ? nil : 'display:none;') {
-        span.js_pfi_filename @filename
-        text ' '
-        a.button.mini.info 'Remove', 'data-pfi-remove' => true
+      div.js_pfi_present.pfi_file_wrapper(style: @filename ? nil : 'display:none;') {
+        div.input_group {
+          span.js_pfi_filename @filename
+          a.button.info.js_pfi_remove 'Remove'
+        }
       }
-      div.js_pfi_blank(style: @filename ? 'display:none;' : nil) {
+      label.js_pfi_blank.pfi_file_wrapper(style: @filename ? 'display:none;' : nil) {
         input type: 'file'
-        span.js_pfi_status
+        div.input_group {
+          span 'Choose a file...'
+          span.button.info 'Browse'
+        }
       }
     }
   end

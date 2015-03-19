@@ -1,6 +1,9 @@
 class UsersController < ActionController::Base
   layout 'application'
 
+  before_action :error_hack, only: [:update]
+  before_action :loading_hack, only: [:update]
+
   def new
     @user = User.new
   end
@@ -15,18 +18,6 @@ class UsersController < ActionController::Base
   end
 
   def update
-    # Hack for testing errors
-    if user_params[:avatar]
-      if user_params[:avatar].original_filename.match('unknownerror')
-        return head :bad_request
-      elsif user_params[:avatar].original_filename.match('error')
-        return render(
-          json: { error: 'This is a server-generated error message.' },
-          status: :bad_request
-        )
-      end
-    end
-
     @user = User.find(params[:id])
     @user.update(user_params)
 
@@ -40,5 +31,26 @@ class UsersController < ActionController::Base
 
   def user_params
     params.require(:user).permit!
+  end
+
+  def error_hack
+    if user_params[:avatar]
+      if user_params[:avatar].original_filename.match('unknownerror')
+        head :bad_request
+      elsif user_params[:avatar].original_filename.match('error')
+        render(
+          json: { error: 'This is a server-generated error message.' },
+          status: :bad_request
+        )
+      end
+    end
+  end
+
+  def loading_hack
+    if user_params[:avatar]
+      if user_params[:avatar].original_filename.match('loading')
+        sleep 3
+      end
+    end
   end
 end

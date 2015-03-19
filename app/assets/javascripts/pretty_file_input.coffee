@@ -128,7 +128,7 @@
         @_uploadSuccess()
 
     _bindEvents: ->
-      @$el.on 'click', '[data-pfi-remove]', $.proxy(@remove, @)
+      @$el.on 'click', '.js_pfi_remove', $.proxy(@remove, @)
       @_bindInputChange()
 
     # FF6 doesn't bubble the 'change' event, so we need to bind
