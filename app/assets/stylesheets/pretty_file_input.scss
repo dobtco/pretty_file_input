@@ -27,7 +27,7 @@
       height: $inputHeight;
     }
 
-    span {
+    :first-child {
       font-size: 1rem;
       width: 65%;
       padding: 0.3rem 0.5rem;
@@ -43,7 +43,7 @@
       }
     }
 
-    a {
+    :last-child {
       width: 35%;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;

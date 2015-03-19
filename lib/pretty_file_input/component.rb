@@ -29,7 +29,7 @@ class PrettyFileInput::Component < Erector::Widget
         input type: 'file'
         div.pfi_input {
           span.js_pfi_filename.js_pfi_status 'Choose a file...'
-          a.button.info.js_pfi_browse 'Browse'
+          span.button.info.js_pfi_browse 'Browse'
         }
       }
     }
