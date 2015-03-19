@@ -7,10 +7,14 @@ describe 'Users', js: true, type: :feature do
 
   let(:created_user) { User.last }
 
+  def file_input
+    find('input[type=file]', visible: false)
+  end
+
   describe '#new + #create' do
     it 'functions properly' do
       visit new_user_path
-      attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/avatar2.jpg"
+      file_input.set "#{Rails.root}/spec/fixtures/avatar2.jpg"
 
       expect do
         click_button 'Submit'
@@ -26,7 +30,7 @@ describe 'Users', js: true, type: :feature do
       user.update(remove_avatar: true)
       expect(user.avatar).to be_blank
       visit edit_user_path(user)
-      find('input[type=file]').set "#{Rails.root}/spec/fixtures/avatar2.jpg"
+      file_input.set "#{Rails.root}/spec/fixtures/avatar2.jpg"
       sleep 1
       expect(user.reload.avatar).to_not be_blank
       expect(user.avatar.file.filename).to eq 'avatar2.jpg'
@@ -43,7 +47,7 @@ describe 'Users', js: true, type: :feature do
       visit edit_user_path(user)
       find('a', text: 'Remove').click
       expect(user.reload.avatar).to be_blank
-      find('input[type=file]').set "#{Rails.root}/spec/fixtures/avatar2.jpg"
+      file_input.set "#{Rails.root}/spec/fixtures/avatar2.jpg"
       sleep 1
       expect(user.reload.avatar).to_not be_blank
       expect(user.avatar.file.filename).to eq 'avatar2.jpg'
@@ -57,7 +61,7 @@ describe 'Users', js: true, type: :feature do
 
     it 'displays server-generated errors' do
       visit edit_user_path(user)
-      find('input[type=file]').set "#{Rails.root}/spec/fixtures/error.jpg"
+      file_input.set "#{Rails.root}/spec/fixtures/error.jpg"
       sleep 1
       expect(page).to have_text 'server-generated error message'
 
@@ -70,7 +74,7 @@ describe 'Users', js: true, type: :feature do
 
     it 'falls back to a generic error' do
       visit edit_user_path(user)
-      find('input[type=file]').set "#{Rails.root}/spec/fixtures/unknownerror.jpg"
+      file_input.set "#{Rails.root}/spec/fixtures/unknownerror.jpg"
       sleep 1
       expect(page).to have_text 'Whoops!'
 

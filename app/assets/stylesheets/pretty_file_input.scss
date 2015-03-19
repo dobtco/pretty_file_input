@@ -1,13 +1,12 @@
 .pfi_file_wrapper {
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
   position: relative;
   display: inline-block;
   height: $inputHeight;
 
   // Position the items absolutely
   input, .input_group {
-    width: 100%;
+    width: 400px;
     position: absolute;
     top: 0;
     left: 0;
