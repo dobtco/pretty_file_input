@@ -45,6 +45,7 @@
 
     :last-child {
       width: 35%;
+      border: 0; // Fix alignment
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       line-height: normal;
