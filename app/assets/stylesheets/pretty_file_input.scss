@@ -1,15 +1,18 @@
 .pfi_file_wrapper {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   position: relative;
   display: inline-block;
   height: $inputHeight;
 
   // Position the items absolutely
-  input, .input_group {
-    width: 400px;
+  input {
+    width: 100%;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 2;
+    height: $inputHeight;
   }
 
   // Hide the input via opacity
@@ -18,8 +21,8 @@
   }
 
   .input_group {
-    // Necessary for ellipsis to work
-    table-layout: fixed;
+    width: 100%;
+    table-layout: fixed; // Necessary for ellipsis to work
 
     span {
       display: table-cell;
