@@ -21,6 +21,10 @@ class UsersController < ActionController::Base
     @user = User.find(params[:id])
     @user.update(user_params)
 
+    if params[:pretty_file_input]
+      request.format = :json
+    end
+
     respond_to do |format|
       format.json { render json: { ok: true } }
       format.html { redirect_to edit_user_path }
