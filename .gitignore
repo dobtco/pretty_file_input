@@ -9,3 +9,4 @@ spec/dummy/tmp/*
 spec/dummy/log/*
 spec/dummy/public/uploads/*
 spec/dummy/db/test.sqlite
+spec/dummy/db/development.sqlite

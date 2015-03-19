@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver', '2.45.0'
   s.add_development_dependency 'simple_form', '3.1.0'
   s.add_development_dependency 'sqlite3', '1.3.9'
+  s.add_development_dependency 'thin', '1.6.3'
 end
