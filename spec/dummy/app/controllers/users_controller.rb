@@ -34,7 +34,11 @@ class UsersController < ActionController::Base
   private
 
   def user_params
-    params.require(:user).permit!
+    if params[:user]
+      params.require(:user).permit!
+    else
+      {}
+    end
   end
 
   def error_hack
