@@ -16,6 +16,10 @@
       @$input = @$el.find('input')
       @$filename = @$el.find('.js_pfi_filename')
       @$status = @$el.find('.js_pfi_status')
+      @$button = @$el.find('.js_pfi_browse')
+
+      @buttonText = @$button.text()
+      @statusText = @$status.text()
 
       # If we're not persisted, immediately add the correct input name
       if !@options.persisted
@@ -36,6 +40,8 @@
       @_bindEvents()
 
     remove: ->
+      @$status.text @statusText
+
       if @options.persisted
         @_ajaxRemove()
       else
@@ -63,9 +69,9 @@
         dataType: 'json'
         data: @_baseParams()
         uploadProgress: (_, __, ___, percentComplete) =>
-          @$status.text(
+          @$button.text(
             if percentComplete == 100
-              'Finishing'
+              'Finishing...'
             else
               "Uploading (#{percentComplete}%)"
           )
@@ -100,17 +106,29 @@
       if data?.additionalParams?
         @options.additionalParams = data.additionalParams
 
-      @$status.text('')
+      @$button.removeClass('disabled')
+      @$button.text @buttonText
       @_toggleState()
 
     _uploadError: (xhr) ->
-      msg = if (err = xhr.responseJSON?.error)
-              "Error: #{err}"
-            else
-              'Whoops! An error occurred.'
+      @$button.removeClass('disabled')
+      @$button.text @buttonText
 
+      @_flashError(
+        if (err = xhr.responseJSON?.error)
+          "Error: #{err}"
+        else
+          'Whoops! An error occurred.'
+      )
+
+    _flashError: (msg) ->
       @$status.text msg
-      setTimeout ( => @$status.text('') ), 2000
+      @$status.addClass 'is_error'
+
+      setTimeout =>
+        @$status.removeClass 'is_error'
+        @$status.text @statusText
+      , 2500
 
     _eventToFilename: (e) ->
       if e.target.files?
@@ -122,7 +140,8 @@
       @$filename.text @_eventToFilename(e)
 
       if @options.persisted
-        @$status.text 'Uploading...'
+        @$button.addClass('disabled')
+        @$button.text 'Uploading...'
         @_ajaxUpload()
       else
         @_uploadSuccess()

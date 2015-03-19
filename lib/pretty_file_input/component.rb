@@ -28,8 +28,8 @@ class PrettyFileInput::Component < Erector::Widget
       label.js_pfi_blank.pfi_file_wrapper(style: @filename ? 'display:none;' : nil) {
         input type: 'file'
         div.input_group {
-          span 'Choose a file...'
-          span.button.info 'Browse'
+          span.js_pfi_filename.js_pfi_status 'Choose a file...'
+          a.button.info.js_pfi_browse 'Browse'
         }
       }
     }
