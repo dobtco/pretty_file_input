@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Users', js: true, type: :feature do
+describe 'Users', js: true, type: :feature, sauce: true do
   let!(:user) do
     User.create(avatar: File.open("#{Rails.root}/../fixtures/avatar.jpg"))
   end
