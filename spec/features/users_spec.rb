@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Users', js: true, type: :feature do
   let!(:user) do
-    User.create(avatar: File.open("#{Rails.root}/spec/fixtures/avatar.jpg"))
+    User.create(avatar: File.open("#{Rails.root}/../fixtures/avatar.jpg"))
   end
 
   let(:created_user) { User.last }
@@ -10,7 +10,7 @@ describe 'Users', js: true, type: :feature do
   describe '#new + #create' do
     it 'functions properly' do
       visit new_user_path
-      attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/avatar2.jpg"
+      attach_file 'user[avatar]', "#{Rails.root}/../fixtures/avatar2.jpg"
 
       expect do
         click_button 'Submit'
@@ -26,7 +26,7 @@ describe 'Users', js: true, type: :feature do
       user.update(remove_avatar: true)
       expect(user.avatar).to be_blank
       visit edit_user_path(user)
-      find('input[type=file]').set "#{Rails.root}/spec/fixtures/avatar2.jpg"
+      find('input[type=file]').set "#{Rails.root}/../fixtures/avatar2.jpg"
       sleep 1
       expect(user.reload.avatar).to_not be_blank
       expect(user.avatar.file.filename).to eq 'avatar2.jpg'
@@ -43,7 +43,7 @@ describe 'Users', js: true, type: :feature do
       visit edit_user_path(user)
       find('a', text: 'Remove').click
       expect(user.reload.avatar).to be_blank
-      find('input[type=file]').set "#{Rails.root}/spec/fixtures/avatar2.jpg"
+      find('input[type=file]').set "#{Rails.root}/../fixtures/avatar2.jpg"
       sleep 1
       expect(user.reload.avatar).to_not be_blank
       expect(user.avatar.file.filename).to eq 'avatar2.jpg'
