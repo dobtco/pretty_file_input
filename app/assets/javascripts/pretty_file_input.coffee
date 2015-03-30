@@ -41,7 +41,9 @@
       else
         @$input.val('')
 
-      @$el.removeClass('is_uploaded')
+      @$el.
+        removeClass('is_uploaded').
+        trigger('pfi:removed')
 
     _baseParams: ->
       $.extend { pretty_file_input: true }, @options.additionalParams
@@ -98,7 +100,9 @@
         @options.additionalParams = data.additionalParams
 
       @$status.text('')
-      @$el.addClass('is_uploaded')
+      @$el.
+        addClass('is_uploaded').
+        trigger('pfi:uploaded')
 
     _uploadError: ->
       @$status.text 'Error'

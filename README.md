@@ -63,6 +63,11 @@ action: nil,          # override the parent form's action
 additional_params: {} # additional parameters to be sent to server with each request
 ```
 
+### Events
+
+- `pfi:uploaded`
+- `pfi:removed`
+
 ## License
 
 [MIT](http://dobtco.mit-license.org/)
