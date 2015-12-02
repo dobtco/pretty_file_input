@@ -1,7 +1,7 @@
 class PrettyFileInputInput < SimpleForm::Inputs::Base
   def input(wrapper_options)
     @builder.multipart = true
-    PrettyFileInput::Component.new(
+    PrettyFileInput::Views::Component.new(
       name: tag_name,
       persisted: object.try(:persisted?),
       filename: object.try(:send, attribute_name).try(:file).try(:filename)

@@ -52,7 +52,7 @@ The resulting behavior will depend on whether or not the parent object is alread
 
 ### Manual
 
-If your use case doesn't fit the patterns above, you can use the "Manual" integration with pretty_file_input. `PrettyFileInput::Component` is an Erector widget that can be customized with the following options:
+If your use case doesn't fit the patterns above, you can use the "Manual" integration with pretty_file_input. `PrettyFileInput::Views::Component` is a Fortitude widget that can be customized with the following options:
 
 ```rb
 :name,                # input name that will be sent to the server
