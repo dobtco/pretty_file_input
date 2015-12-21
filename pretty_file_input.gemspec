@@ -17,12 +17,12 @@ Gem::Specification.new do |s|
   s.homepage = 'http://github.com/dobtco/pretty_file_input'
 
   s.add_dependency 'coffee-script'
-  s.add_dependency 'erector-rails4'
+  s.add_dependency 'fortitude'
   s.add_dependency 'sass'
 
   s.add_development_dependency 'capybara', '2.4.4'
   s.add_development_dependency 'carrierwave'
-  s.add_development_dependency 'rails', '4.1.9'
+  s.add_development_dependency 'rails', '4.2.5'
   s.add_development_dependency 'rspec-rails', '3.1.0'
   s.add_development_dependency 'selenium-webdriver', '2.45.0'
   s.add_development_dependency 'simple_form', '3.1.0'
