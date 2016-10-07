@@ -1,3 +1,6 @@
+DEPRECATED
+
+
 pretty_file_input [![version]](http://rubygems.org/gems/pretty_file_input) [![build]](https://travis-ci.org/dobtco/pretty_file_input)
 =======
 
